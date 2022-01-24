@@ -5,23 +5,25 @@ from datetime import datetime
 
 def main():
     # Get the user's gender, birthdate, height, and weight.
-    gender = input('Please enter your gender (M or F): ')
-    birthdate = input('Enter your birthdate(YYYY-MM-DD): ')
-    weight_pounds = int(input('Enter your weight in U.S. pounds: '))
-    height_inches = int(input('Enter your height in U.S. inches: '))
+    gender = input("Enter your gender (M or F): ")
+    birth_str = input("Enter your birthday (YYYY-MM-DD): ")
+    inches = float(input("Enter your height in inches: "))
+    pounds = float(input("Enter your weight in pounds: "))
     
+
     # Call the compute_age, kg_from_lb, cm_from_in,
     # body_mass_index, and basal_metabolic_rate functions
     # as needed.
-    age = compute_age(birthdate)
-    weight_kg = kg_from_lb(weight_pounds)
-    height_cm = cm_from_in(height_inches)
-    bmi = body_mass_index(weight_kg, height_cm)
-    bmr = basal_metabolic_rate(gender, weight_kg, height_cm, age)
+
+    age = compute_age(birth_str)
+    weight = kg_from_lb(pounds)
+    height = cm_from_in(inches)
+    bmi = body_mass_index (weight, height)
+    bmr = basal_metabolic_rate (gender, weight, height, age)
+
 
     # Print the results for the user to see.
-    print(age, weight_kg, height_cm, bmi, bmr)
-    
+    print(f"Age (years): {age} \nWeight (kg): {weight:.2f} \nHeight (cm) {height:.1f} \nBody mass index: {bmi:.1f} \nBasal metabolic rate (kcal/day): {bmr:.0f} ")
     pass
 
 
@@ -54,7 +56,8 @@ def kg_from_lb(pounds):
     Parameter pounds: a mass in U.S. pounds.
     Return: the mass in kilograms.
     """
-    return pounds * 0.45359237
+    kg = pounds * 0.4539237 
+    return kg
 
 
 def cm_from_in(inches):
@@ -62,7 +65,8 @@ def cm_from_in(inches):
     Parameter inches: a length in inches.
     Return: the length in centimeters.
     """
-    return inches * 2.54
+    cm = inches * 2.54 
+    return cm 
 
 
 def body_mass_index(weight, height):
@@ -72,7 +76,8 @@ def body_mass_index(weight, height):
         height: a person's height in centimeters.
     Return: a person's body mass index.
     """
-    return weight / (height / 100) ** 2
+    bmi = (10000 * weight) / height ** 2
+    return bmi
 
 
 def basal_metabolic_rate(gender, weight, height, age):
@@ -83,13 +88,12 @@ def basal_metabolic_rate(gender, weight, height, age):
         age: a person's age in years.
     Return: a person's basal metabolic rate in kcals per day.
     """
-    
-    if gender.lower() == 'f':
-        bmr = 447.593 + 9.247 * weight + 3.098 * height - 4.330 * age
-        
-    else:
+    if gender == "M":
         bmr = 88.362 + 13.397 * weight + 4.799 * height - 5.677 * age
-        
+    elif gender == "F":
+        bmr = 447.593 + 9.247 * weight + 3.098 * height - 4.330 * age
+    else:
+        print("That is not an option")
     return bmr
 
 
