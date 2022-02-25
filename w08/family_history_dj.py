@@ -91,6 +91,8 @@ def main():
     # human readable data about the marriages.
     print_marriages(marriages_dict, people_dict)
 
+    print()
+
     count_marriages(marriages_dict, people_dict)
 
 
